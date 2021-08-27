@@ -11,10 +11,10 @@ Projeto de uma aplicação web para Ecommerce em Single Page Aplication, contend
 - SPA com RouteModule;
 
 ## Instruções para a instalação:
-Não será necessária instalação, o projeto em funcionamento encontra-se neste [Link]().
+Não será necessária instalação, o projeto em funcionamento encontra-se neste [Link](https://ecommerce-angular-jcgama.vercel.app/).
 
 
 ## Referências:
-Projeto com base as aulas da [Loiane Groner](https://github.com/loiane) na sua plataforma [Loiane.training](https://loiane.training/curso/angular).
+Projeto com base as aulas da [Loiane Groner](https://github.com/loiane) na sua plataforma [loiane.training](https://loiane.training/curso/angular).
 
 
