@@ -1,27 +1,20 @@
-# ECommerce
+# Aplicação Web - ECommerce com Angular
+#### Status: Em andamento.
+Projeto de uma aplicação web para Ecommerce em Single Page Aplication, contendo página inicial dos produtos, carrinho de compras, perfil e sobre, a ideia inicial é consumir os dados a partir de uma API (TheMealDB?) e armazenar as informações no localstorage.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.2.
+## Tecnologias:
+- Angular 12;
+- Ngx Bootstrap;
+- Vercel, para deploy da aplicação na nuvem.
 
-## Development server
+## Características:
+- SPA com RouteModule;
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Instruções para a instalação:
+Não será necessária instalação, o projeto em funcionamento encontra-se neste [Link]().
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Referências:
+Projeto com base as aulas da [Loiane Groner](https://github.com/loiane) na sua plataforma [Loiane.training](https://loiane.training/curso/angular).
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
