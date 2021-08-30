@@ -1,0 +1,19 @@
+.background404 {
+    box-sizing: border-box;
+    background: url('./images/404-bg.jpg');
+    background-position: center;
+    background-color: #000;
+    background-repeat: no-repeat;
+    background-size:cover;
+    height: 80vh;
+    filter: blur(4px);
+    -webkit-filter: blur(4px);
+}
+
+.text404{
+    text-align: center;
+    color: #ffff;
+    position: absolute;
+    top: 40vh;
+    left: 40vh
+}
