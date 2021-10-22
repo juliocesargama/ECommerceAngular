@@ -7,9 +7,9 @@ import { AppComponent } from './app.component';
 import { CartComponent } from './components/cart/cart.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { Error404Component } from './components/error404/error404.component';
 import { ProductsModule } from './components/products/products.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -17,7 +17,6 @@ import { ProductsModule } from './components/products/products.module';
     CartComponent,
     ProfileComponent,
     HeaderComponent,
-    FooterComponent,
     Error404Component,
   ],
   imports: [
@@ -25,6 +24,7 @@ import { ProductsModule } from './components/products/products.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

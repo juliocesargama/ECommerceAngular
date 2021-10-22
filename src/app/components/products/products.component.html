@@ -1,3 +1,20 @@
-<div class="container">
-    <p>products works!</p>
+<div class="container-fluid row justify-content-around">
+  <div class="card text-center bg-light col-auto ml-4 mt-2 mb-2 p-2" *ngFor="let product of products">
+    <img
+      class="card-img-top"
+      src="{{ product.photo }}"
+      alt=""
+    />
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">{{ product.description }}</p>
+      <p class="card-text">{{ product.price }}</p>
+
+      <a href="#" class="btn btn-dark">Adicionar ao carrinho</a>
+    </div>
+
+  </div>
 </div>
+
+
+

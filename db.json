@@ -1,0 +1,32 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "photo": "https://www.nestle.com.br/images/default-source/embalagens-produto/chocolate-ao-leite/classic-ao-leite-familiar.png",
+      "name":"Nestlé Classic",
+      "description": "Ao leite, 100gr.",
+      "price": "R$ 5,90"
+    },
+    {
+      "id": 2,
+      "photo": "https://images.tcdn.com.br/img/img_prod/663654/chocolate_barra_crunch_nestle_90g_1119_1_20190807172942.png",
+      "name":"Nestlé Crunch",
+      "description": "Ao leite e crocante, 90gr.",
+      "price": "R$5,50"
+    },
+    {
+      "id": 3,
+      "photo": "https://www.vilelaavenida.com.br/image/cache/catalog/HERSHEY'S/CHOCOLATE%20HERSHEY'S%20AMENDOIM%2085GR%201-500x500.png",
+      "name":"Hershey's Amendoim ",
+      "description": "Ao leite e amendoim, 100gr.",
+      "price": "R$ 4,80"
+    },
+    {
+      "id": 4,
+      "photo": "https://comercial-daterra.s3.amazonaws.com/media/uploads/produto/chocolate_lacta_diamante_negro_laka_90g_550ab76e-5552-4e48-9bbb-cf81d8c663f3.png",
+      "name":"Laka & Diamante Negro",
+      "description": "Ao leite e branco, 90gr.",
+      "price": "R$ 5.80"
+    }
+  ]
+}
