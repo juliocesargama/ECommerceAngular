@@ -21,6 +21,11 @@ Para iniciar o projeto:
 ```sh
 ng serve -o
 ```
+Para istalar o JSON Server:
+```sh
+npm install -g json-server
+```
+
 Para iniciar o JSON Server:
 ```sh
 json-server --watch db.json
