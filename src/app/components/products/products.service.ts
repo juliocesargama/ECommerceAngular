@@ -1,3 +1,4 @@
+import { environment } from './../../../environments/environment.prod';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Products } from './products';
@@ -7,7 +8,7 @@ import { Products } from './products';
 
 export class ProductsService {
 
-  private readonly API = 'http://localhost:3000/products';
+  private readonly API = environment.API;
 
   constructor(private http: HttpClient){}
 

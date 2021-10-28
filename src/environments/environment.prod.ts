@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  API: 'https://raw.githubusercontent.com/juliocesargama/ECommerceAngular/master/db.json'
 };

@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductsComponent } from './products.component';
-import { FooterComponent } from './../footer/footer.component';
 import { ProductsService } from './products.service';
 
 @NgModule({
@@ -13,8 +12,7 @@ import { ProductsService } from './products.service';
   ],
   exports: [],
   declarations: [
-    ProductsComponent,
-    FooterComponent
+    ProductsComponent
   ],
   providers: [ProductsService]
 })
