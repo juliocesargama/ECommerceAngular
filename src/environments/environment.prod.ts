@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  API: 'https://raw.githubusercontent.com/juliocesargama/ECommerceAngular/master/db.json'
+  API: 'https://jsoneditoronline.org/#left=cloud.c9efb4554bb74c3590d25c96ad7f0132'
 };
