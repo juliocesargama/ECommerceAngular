@@ -1,14 +1,16 @@
 # Aplicação Web - ECommerce com Angular
 #### Status: Em andamento.
-Projeto de uma aplicação web para Ecommerce em Single Page Aplication, contendo página inicial dos produtos, carrinho de compras, perfil e sobre, consumindo os dados a partir de uma simulação de API e armazenar as informações de compra no localstorage, simulando o envio dos dados de compra para o back-end.
+Projeto de uma aplicação web para Ecommerce em Single Page Aplication, contendo página inicial dos produtos, carrinho de compras, perfil e sobre, consumindo os dados a partir de uma simulação de API e armazenar as informações de compra por requisição HTTP, simulando o envio dos dados de compra para o back-end.
 
 ## Tecnologias:
 - Angular 12;
 - Ngx Bootstrap;
+- Formulários Reativos;
+- Ngx Mask
 
 ## Características:
 - SPA com RouteModule;
-- Json Server
+- Json Server.
 
 ## Instruções para a instalação:
 
@@ -32,6 +34,6 @@ json-server --watch db.json
 ```
 
 ## Referências:
-Projeto com base as aulas da [Loiane Groner](https://github.com/loiane) na sua plataforma [loiane.training](https://loiane.training/curso/angular).
+Projeto baseado nos conhecimentos adquirios através das aulas da [Loiane Groner](https://github.com/loiane) na sua plataforma [loiane.training](https://loiane.training/curso/angular).
 
 

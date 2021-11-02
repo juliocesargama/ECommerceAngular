@@ -11,7 +11,7 @@ preserveWhitespaces: true;
 })
 export class ProductsComponent implements OnInit {
 
-  products: Products[] = [];
+  products!: Products[];
 
   constructor(private productsService: ProductsService) { }
 

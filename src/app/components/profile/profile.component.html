@@ -1,4 +1,230 @@
-
 <div class="container">
-    <p>profile works!</p>
+  <form class="form-row m-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+    <!-- Input Name -->
+    <div class="form-group col-sm-12 col-md-8 mb-3" [ngClass]="cssError('name')">
+      <label for="name" class="form-label">Nome: </label>
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        placeholder="Seu nome aqui"
+        formControlName="name"
+      />
+
+      <app-error-control
+      [showError]="checkValidTouched('name')"
+      msgError = "Campo nome é obrigatório."
+      ></app-error-control>
+
+    </div>
+
+    <!-- Input Phone -->
+    <div class="form-group col-12 col-md-4 mb-3" [ngClass]="cssError('phone')">
+      <label for="phone" class="form-label">Telefone: </label>
+      <input
+        type="text"
+        class="form-control"
+        id="phone"
+        mask="(00) 0000-0000 || (00) 0 0000-0000"
+        placeholder="(99)3333-2222"
+        formControlName="phone"
+      />
+
+      <app-error-control
+      [showError]="checkValidTouched('phone')"
+      msgError = "Campo telefone é obrigatório."
+      ></app-error-control>
+
+    </div>
+
+    <!-- Input Email -->
+    <div class="form-group col-12 col-md-6 mb-3" [ngClass]="cssError('email')">
+      <label for="email" class="form-label">Email: </label>
+      <input
+        type="text"
+        class="form-control"
+        id="email"
+        placeholder="email@email.com"
+        formControlName="email"
+      />
+      <app-error-control
+      [showError]="checkValidTouched('email')"
+      msgError = "Campo email é obrigatório."
+      ></app-error-control>
+
+      <app-error-control
+      [showError]="checkInvalidEmail()"
+      msgError = "Campo email é inválido."
+      ></app-error-control>
+    </div>
+
+    <!-- Input Password -->
+    <div class="form-group col-12 col-md-6 mb-3" [ngClass]="cssError('password')">
+      <label for="senha" class="form-label">Senha: </label>
+      <input
+        type="password"
+        class="form-control"
+        id="senha"
+        placeholder="Insira uma senha"
+        formControlName="password"
+      />
+      <small class="form-text text-muted"
+        >deve conter entre 6 a 20 caracteres.</small
+      >
+
+      <app-error-control
+      [showError]="checkValidTouched('password')"
+      msgError = "Campo senha é obrigatória."
+      ></app-error-control>
+
+      <app-error-control
+      [showError]="checkMinPassword()"
+      msgError = "Campo senha não contém 6 caracteres."
+      ></app-error-control>
+
+      <app-error-control
+      [showError]="checkMaxPassword()"
+      msgError = "Campo senha contém mais de 20 caracteres."
+      ></app-error-control>
+
+    </div>
+
+    <!-- Input ZipCode -->
+    <div class="col-12 col-lg-6 mb-3">
+      <div class="form-row">
+        <div class="form-group col-6" [ngClass]="cssError('zipcode')">
+          <label for="zipcode" class="form-label">CEP: </label>
+          <input
+            type="text"
+            class="form-control"
+            id="zipcode"
+            mask="00000-000"
+            placeholder="12345-678"
+            formControlName="zipcode"
+          />
+        </div>
+        <div class="form-group col-6 align-self-end">
+          <button type="submit" class="btn btn-secondary btn-block">
+            Consultar CEP
+          </button>
+        </div>
+      </div>
+
+      <app-error-control
+      [showError]="checkValidTouched('zipcode')"
+      msgError = "Campo CEP é obrigatório."
+      ></app-error-control>
+
+    </div>
+
+    <!-- Input Address -->
+    <div class="form-group mb-3 col-9" [ngClass]="cssError('address')">
+      <label for="address" class="form-label">Endereço: </label>
+      <input
+        type="text"
+        class="form-control"
+        id="address"
+        placeholder=""
+        formControlName="address"
+      />
+
+      <app-error-control
+      [showError]="checkValidTouched('address')"
+      msgError = "Campo endereço é obrigatório."
+      ></app-error-control>
+    </div>
+
+    <!-- Input Number -->
+    <div class="form-group mb-3 col-3" [ngClass]="cssError('addressNumber')">
+      <label for="addressNumber" class="form-label">Número: </label>
+      <input
+        type="text"
+        class="form-control"
+        id="addressNumber"
+        placeholder=""
+        formControlName="addressNumber"
+      />
+
+      <app-error-control
+      [showError]="checkValidTouched('addressNumber')"
+      msgError = "Campo número é obrigatório."
+      ></app-error-control>
+    </div>
+
+    <!-- Input City -->
+    <div class="form-group mb-3 col-6" [ngClass]="cssError('city')">
+      <label for="city" class="form-label">Cidade: </label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        placeholder=""
+        formControlName="city"
+      />
+
+      <app-error-control
+      [showError]="checkValidTouched('city')"
+      msgError = "Campo cidade é obrigatório."
+      ></app-error-control>
+
+    </div>
+
+    <!-- Input State -->
+    <div class="form-group mb-3 col-3" [ngClass]="cssError('state')">
+      <label for="state" class="form-label">Estado: </label>
+      <input
+        type="text"
+        class="form-control"
+        id="state"
+        placeholder=""
+        formControlName="state"
+      />
+
+      <app-error-control
+      [showError]="checkValidTouched('state')"
+      msgError = "Campo estado é obrigatório."
+      ></app-error-control>
+    </div>
+
+    <!-- Input Country -->
+    <div class="form-group mb-3 col col-3" [ngClass]="cssError('country')">
+      <label for="country" class="form-label">País: </label>
+      <input
+        type="text"
+        class="form-control"
+        id="country"
+        placeholder=""
+        formControlName="country"
+      />
+
+      <app-error-control
+      [showError]="checkValidTouched('country')"
+      msgError = "Campo país é obrigatório."
+      ></app-error-control>
+    </div>
+
+    <!-- Checkbox  -->
+    <div class="form-group col-12 text-center my-1 mb-3" >
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="checkbox" formControlName="terms"/>
+        <label class="form-check-label" for="checkbox">
+          Estou de acordo com a
+          <a class="link" href="#">Política de Privacidade</a>.
+        </label>
+      </div>
+
+      <app-error-control
+      [showError]="checkValidTouched('terms')"
+      msgError = "É necessário aceitar os termos de Política de Privacidade. "
+      ></app-error-control>
+    </div>
+
+    <!-- Button Submit -->
+    <div class="form-group col text-center">
+      <button type="submit" class="btn btn-primary btn-block mb-2" [disabled]=!form.valid>
+        Criar novo cadastro
+      </button>
+    </div>
+  </form>
 </div>
