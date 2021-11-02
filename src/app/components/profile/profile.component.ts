@@ -23,6 +23,7 @@ export class ProfileComponent implements OnInit {
       zipcode: [null, Validators.required],
       address: [null, Validators.required],
       addressNumber: [null, Validators.required],
+      area: [null, Validators.required],
       city: [null, Validators.required],
       state: [null, Validators.required],
       country: [null, Validators.required],

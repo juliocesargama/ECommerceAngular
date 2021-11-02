@@ -152,8 +152,26 @@
       ></app-error-control>
     </div>
 
+<!-- Input Area -->
+<div class="form-group mb-3 col-4" [ngClass]="cssError('area')">
+  <label for="area" class="form-label">Bairro: </label>
+  <input
+    type="text"
+    class="form-control"
+    id="area"
+    placeholder=""
+    formControlName="area"
+  />
+
+  <app-error-control
+  [showError]="checkValidTouched('area')"
+  msgError = "Campo bairro é obrigatório."
+  ></app-error-control>
+
+</div>
+
     <!-- Input City -->
-    <div class="form-group mb-3 col-6" [ngClass]="cssError('city')">
+    <div class="form-group mb-3 col-5" [ngClass]="cssError('city')">
       <label for="city" class="form-label">Cidade: </label>
       <input
         type="text"
@@ -171,7 +189,7 @@
     </div>
 
     <!-- Input State -->
-    <div class="form-group mb-3 col-3" [ngClass]="cssError('state')">
+    <div class="form-group mb-2 col-3" [ngClass]="cssError('state')">
       <label for="state" class="form-label">Estado: </label>
       <input
         type="text"
@@ -184,23 +202,6 @@
       <app-error-control
       [showError]="checkValidTouched('state')"
       msgError = "Campo estado é obrigatório."
-      ></app-error-control>
-    </div>
-
-    <!-- Input Country -->
-    <div class="form-group mb-3 col col-3" [ngClass]="cssError('country')">
-      <label for="country" class="form-label">País: </label>
-      <input
-        type="text"
-        class="form-control"
-        id="country"
-        placeholder=""
-        formControlName="country"
-      />
-
-      <app-error-control
-      [showError]="checkValidTouched('country')"
-      msgError = "Campo país é obrigatório."
       ></app-error-control>
     </div>
 
