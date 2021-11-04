@@ -1,8 +1,10 @@
 <div class="container">
-  <form class="form-row m-3" [formGroup]="form" (ngSubmit)="onSubmit()">
-
+  <form class="form-row m-3" [formGroup]="form">
     <!-- Input Name -->
-    <div class="form-group col-sm-12 col-md-8 mb-3" [ngClass]="cssError('name')">
+    <div
+      class="form-group col-sm-12 col-md-8 mb-3"
+      [ngClass]="cssError('name')"
+    >
       <label for="name" class="form-label">Nome: </label>
       <input
         type="text"
@@ -13,10 +15,9 @@
       />
 
       <app-error-control
-      [showError]="checkValidTouched('name')"
-      msgError = "Campo nome é obrigatório."
+        [showError]="checkValidTouched('name')"
+        msgError="Campo nome é obrigatório."
       ></app-error-control>
-
     </div>
 
     <!-- Input Phone -->
@@ -27,15 +28,14 @@
         class="form-control"
         id="phone"
         mask="(00) 0000-0000 || (00) 0 0000-0000"
-        placeholder="(99)3333-2222"
+        [showMaskTyped]="true"
         formControlName="phone"
       />
 
       <app-error-control
-      [showError]="checkValidTouched('phone')"
-      msgError = "Campo telefone é obrigatório."
+        [showError]="checkValidTouched('phone')"
+        msgError="Campo telefone é obrigatório."
       ></app-error-control>
-
     </div>
 
     <!-- Input Email -->
@@ -49,23 +49,26 @@
         formControlName="email"
       />
       <app-error-control
-      [showError]="checkValidTouched('email')"
-      msgError = "Campo email é obrigatório."
+        [showError]="checkValidTouched('email')"
+        msgError="Campo email é obrigatório."
       ></app-error-control>
 
       <app-error-control
-      [showError]="checkInvalidEmail()"
-      msgError = "Campo email é inválido."
+        [showError]="checkInvalidEmail()"
+        msgError="Campo email é inválido."
       ></app-error-control>
     </div>
 
     <!-- Input Password -->
-    <div class="form-group col-12 col-md-6 mb-3" [ngClass]="cssError('password')">
+    <div
+      class="form-group col-12 col-md-6 mb-3"
+      [ngClass]="cssError('password')"
+    >
       <label for="senha" class="form-label">Senha: </label>
       <input
         type="password"
         class="form-control"
-        id="senha"
+        id="password"
         placeholder="Insira uma senha"
         formControlName="password"
       />
@@ -74,141 +77,168 @@
       >
 
       <app-error-control
-      [showError]="checkValidTouched('password')"
-      msgError = "Campo senha é obrigatória."
+        [showError]="checkValidTouched('password')"
+        msgError="Campo senha é obrigatória."
       ></app-error-control>
 
       <app-error-control
-      [showError]="checkMinPassword()"
-      msgError = "Campo senha não contém 6 caracteres."
+        [showError]="checkMinPassword()"
+        msgError="Campo senha não contém 6 caracteres."
       ></app-error-control>
 
       <app-error-control
-      [showError]="checkMaxPassword()"
-      msgError = "Campo senha contém mais de 20 caracteres."
+        [showError]="checkMaxPassword()"
+        msgError="Campo senha contém mais de 20 caracteres."
       ></app-error-control>
-
     </div>
 
-    <!-- Input ZipCode -->
-    <div class="col-12 col-lg-6 mb-3">
-      <div class="form-row">
-        <div class="form-group col-6" [ngClass]="cssError('zipcode')">
-          <label for="zipcode" class="form-label">CEP: </label>
-          <input
-            type="text"
-            class="form-control"
-            id="zipcode"
-            mask="00000-000"
-            placeholder="12345-678"
-            formControlName="zipcode"
-          />
-        </div>
-        <div class="form-group col-6 align-self-end">
-          <button type="submit" class="btn btn-secondary btn-block">
-            Consultar CEP
-          </button>
+    <div class="form-row" formGroupName="fullAddress">
+      <!-- Input ZipCode -->
+      <div class="col-12 col-lg-6 mb-3">
+        <div class="form-row">
+          <div
+            class="form-group col-6"
+            [ngClass]="cssError('fullAddress.zipcode')"
+          >
+            <label for="zipcode" class="form-label">CEP: </label>
+            <input
+              type="text"
+              class="form-control"
+              id="zipcode"
+              mask="00000-000"
+              [showMaskTyped]="true"
+              [validation]="true"
+              formControlName="zipcode"
+            />
+          </div>
+          <div class="form-group col-6 align-self-end">
+            <button
+              type="submit"
+              class="btn btn-secondary btn-block"
+              (click)="getAddress()"
+              disabled
+              [disabled]="!form.get('fullAddress.zipcode')?.valid"
+            >
+              Consultar CEP
+            </button>
+          </div>
+          <app-error-control
+            [showError]="checkValidTouched('fullAddress.zipcode')"
+            msgError="Campo CEP é obrigatório."
+          ></app-error-control>
         </div>
       </div>
 
-      <app-error-control
-      [showError]="checkValidTouched('zipcode')"
-      msgError = "Campo CEP é obrigatório."
-      ></app-error-control>
+      <!-- Input Street -->
+      <div
+        class="form-group mb-3 col-9"
+        [ngClass]="cssError('fullAddress.street')"
+      >
+        <label for="street" class="form-label">Logradouro: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="street"
+          placeholder="Rua, Avenida..."
+          formControlName="street"
+        />
 
-    </div>
+        <app-error-control
+          [showError]="checkValidTouched('fullAddress.street')"
+          msgError="Campo logradouro é obrigatório."
+        ></app-error-control>
+      </div>
 
-    <!-- Input Address -->
-    <div class="form-group mb-3 col-9" [ngClass]="cssError('address')">
-      <label for="address" class="form-label">Endereço: </label>
-      <input
-        type="text"
-        class="form-control"
-        id="address"
-        placeholder=""
-        formControlName="address"
-      />
+      <!-- Input Number -->
+      <div
+        class="form-group mb-3 col-3"
+        [ngClass]="cssError('fullAddress.number')"
+      >
+        <label for="number" class="form-label">Número: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="number"
+          placeholder=""
+          formControlName="number"
+        />
 
-      <app-error-control
-      [showError]="checkValidTouched('address')"
-      msgError = "Campo endereço é obrigatório."
-      ></app-error-control>
-    </div>
+        <app-error-control
+          [showError]="checkValidTouched('fullAddress.number')"
+          msgError="Campo número é obrigatório."
+        ></app-error-control>
+      </div>
 
-    <!-- Input Number -->
-    <div class="form-group mb-3 col-3" [ngClass]="cssError('addressNumber')">
-      <label for="addressNumber" class="form-label">Número: </label>
-      <input
-        type="text"
-        class="form-control"
-        id="addressNumber"
-        placeholder=""
-        formControlName="addressNumber"
-      />
+      <!-- Input Area -->
+      <div
+        class="form-group mb-3 col-4"
+        [ngClass]="cssError('fullAddress.area')"
+      >
+        <label for="area" class="form-label">Bairro: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="area"
+          placeholder=""
+          formControlName="area"
+        />
 
-      <app-error-control
-      [showError]="checkValidTouched('addressNumber')"
-      msgError = "Campo número é obrigatório."
-      ></app-error-control>
-    </div>
+        <app-error-control
+          [showError]="checkValidTouched('fullAddress.area')"
+          msgError="Campo bairro é obrigatório."
+        ></app-error-control>
+      </div>
 
-<!-- Input Area -->
-<div class="form-group mb-3 col-4" [ngClass]="cssError('area')">
-  <label for="area" class="form-label">Bairro: </label>
-  <input
-    type="text"
-    class="form-control"
-    id="area"
-    placeholder=""
-    formControlName="area"
-  />
+      <!-- Input City -->
+      <div
+        class="form-group mb-3 col-5"
+        [ngClass]="cssError('fullAddress.city')"
+      >
+        <label for="city" class="form-label">Cidade: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="city"
+          placeholder=""
+          formControlName="city"
+        />
 
-  <app-error-control
-  [showError]="checkValidTouched('area')"
-  msgError = "Campo bairro é obrigatório."
-  ></app-error-control>
+        <app-error-control
+          [showError]="checkValidTouched('fullAddress.city')"
+          msgError="Campo cidade é obrigatório."
+        ></app-error-control>
+      </div>
 
-</div>
+      <!-- Input State -->
+      <div
+        class="form-group mb-2 col-3"
+        [ngClass]="cssError('fullAddress.state')"
+      >
+        <label for="state" class="form-label">Estado: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="state"
+          placeholder=""
+          formControlName="state"
+        />
 
-    <!-- Input City -->
-    <div class="form-group mb-3 col-5" [ngClass]="cssError('city')">
-      <label for="city" class="form-label">Cidade: </label>
-      <input
-        type="text"
-        class="form-control"
-        id="city"
-        placeholder=""
-        formControlName="city"
-      />
-
-      <app-error-control
-      [showError]="checkValidTouched('city')"
-      msgError = "Campo cidade é obrigatório."
-      ></app-error-control>
-
-    </div>
-
-    <!-- Input State -->
-    <div class="form-group mb-2 col-3" [ngClass]="cssError('state')">
-      <label for="state" class="form-label">Estado: </label>
-      <input
-        type="text"
-        class="form-control"
-        id="state"
-        placeholder=""
-        formControlName="state"
-      />
-
-      <app-error-control
-      [showError]="checkValidTouched('state')"
-      msgError = "Campo estado é obrigatório."
-      ></app-error-control>
+        <app-error-control
+          [showError]="checkValidTouched('fullAddress.state')"
+          msgError="Campo estado é obrigatório."
+        ></app-error-control>
+      </div>
     </div>
 
     <!-- Checkbox  -->
-    <div class="form-group col-12 text-center my-1 mb-3" >
+    <div class="form-group col-12 text-center my-1 mb-3">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="checkbox" formControlName="terms"/>
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="checkbox"
+          formControlName="terms"
+        />
         <label class="form-check-label" for="checkbox">
           Estou de acordo com a
           <a class="link" href="#">Política de Privacidade</a>.
@@ -216,14 +246,19 @@
       </div>
 
       <app-error-control
-      [showError]="checkValidTouched('terms')"
-      msgError = "É necessário aceitar os termos de Política de Privacidade. "
+        [showError]="checkValidTouched('terms')"
+        msgError="É necessário aceitar os termos de Política de Privacidade. "
       ></app-error-control>
     </div>
 
     <!-- Button Submit -->
     <div class="form-group col text-center">
-      <button type="submit" class="btn btn-primary btn-block mb-2" [disabled]=!form.valid>
+      <button
+        type="submit"
+        class="btn btn-primary btn-block mb-2"
+        [disabled]="!form.valid"
+        (click)="onSubmit()"
+      >
         Criar novo cadastro
       </button>
     </div>
