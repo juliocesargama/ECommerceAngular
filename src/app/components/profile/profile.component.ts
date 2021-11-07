@@ -1,3 +1,6 @@
+import { ZipcodeService } from './zipcode/zipcode.service';
+import { BRStates } from './dropdown/BRStates';
+import { DropdownService } from './dropdown/dropdown.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -9,10 +12,21 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
   form: FormGroup = new FormGroup({});
+  states: BRStates[] = [];
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient,
+    private dropdownSrv: DropdownService,
+    private zipcodeSrv: ZipcodeService
+  ) {}
 
   ngOnInit(): void {
+    this.dropdownSrv.getBRStates().subscribe((data: BRStates[]) => {
+      console.log(data);
+      this.states = data;
+    });
+
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
       phone: [null, Validators.required],
@@ -38,29 +52,22 @@ export class ProfileComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.form);
-
     this.http
       .post('https://httpbin.org/post', JSON.stringify(this.form.value))
       .subscribe(
         (data) => console.log(data),
         (error) => console.log(error)
       );
+    alert('Cadastro efetuado com sucesso!');
   }
 
-  getAddress() {
+  getZipCode() {
     let zipcode = this.form.get('fullAddress.zipcode')?.value;
 
-    var cep = zipcode?.replace(/\D/g, '');
-
-      if (zipcode?.value != '') {
-        let validCep = /^[0-9]{8}$/;
-        if (validCep.test(cep)) {
-          this.http
-            .get(`//viacep.com.br/ws/${cep}/json`)
-            .subscribe((data) => this.setAddress(data), (error) => console.log(error));
-        }
-      }
+    if (zipcode != '' && zipcode != null) {
+      this.zipcodeSrv.getAddress(zipcode)
+      .subscribe((data: any) => this.setAddress(data));
+    }
   }
 
   setAddress(data: any) {
@@ -71,7 +78,6 @@ export class ProfileComponent implements OnInit {
       state: data.uf,
     });
   }
-
 
   cssError(field: any) {
     return {
@@ -92,7 +98,7 @@ export class ProfileComponent implements OnInit {
     let passwordField = this.form.get('password');
 
     if (passwordField?.value?.length < 6) {
-      return passwordField?.errors?.minlength && passwordField.touched;
+      return passwordField?.errors?.minlength;
     }
   }
 
@@ -100,7 +106,7 @@ export class ProfileComponent implements OnInit {
     let passwordField = this.form.get('password');
 
     if (passwordField?.value?.length > 20) {
-      return passwordField?.errors?.maxlength && passwordField.touched;
+      return passwordField?.errors?.maxlength;
     }
   }
 

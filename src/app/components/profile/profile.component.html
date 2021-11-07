@@ -64,7 +64,7 @@
       class="form-group col-12 col-md-6 mb-3"
       [ngClass]="cssError('password')"
     >
-      <label for="senha" class="form-label">Senha: </label>
+      <label for="password" class="form-label">Senha: </label>
       <input
         type="password"
         class="form-control"
@@ -72,9 +72,8 @@
         placeholder="Insira uma senha"
         formControlName="password"
       />
-      <small class="form-text text-muted"
-        >deve conter entre 6 a 20 caracteres.</small
-      >
+      <small class="form-text text-muted">
+        deve conter entre 6 a 20 caracteres.</small>
 
       <app-error-control
         [showError]="checkValidTouched('password')"
@@ -115,7 +114,7 @@
             <button
               type="submit"
               class="btn btn-secondary btn-block"
-              (click)="getAddress()"
+              (click)="getZipCode()"
               disabled
               [disabled]="!form.get('fullAddress.zipcode')?.valid"
             >
