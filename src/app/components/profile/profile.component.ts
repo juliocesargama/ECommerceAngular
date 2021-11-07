@@ -14,7 +14,6 @@ export class ProfileComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   states: BRStates[] = [];
 
-
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -25,8 +24,6 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.dropdownSrv.getBRStates()
     .subscribe((data) => this.states = data);
-
-    console.log(this.states);
 
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
@@ -51,7 +48,6 @@ export class ProfileComponent implements OnInit {
       terms: [true, Validators.requiredTrue],
     });
   }
-
 
   onSubmit() {
     this.http
