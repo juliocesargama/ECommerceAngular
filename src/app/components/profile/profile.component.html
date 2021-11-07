@@ -213,14 +213,15 @@
         class="form-group mb-2 col-3"
         [ngClass]="cssError('fullAddress.state')"
       >
-        <label for="state" class="form-label">Estado: </label>
-        <input
-          type="text"
-          class="form-control"
+      <label for="state" class="form-label">Estado: </label>
+        <select
+          class="form-control form-select form-select-lg"
           id="state"
-          placeholder=""
           formControlName="state"
-        />
+        >
+      <option [ngValue]="null" disabled>Selecione...</option>
+      <option *ngFor="let state of states" [ngValue]="state.sigla">{{state.sigla}}</option>
+      </select>
 
         <app-error-control
           [showError]="checkValidTouched('fullAddress.state')"

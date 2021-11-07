@@ -1,3 +1,4 @@
+import { BRStates } from './BRStates';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -11,16 +12,6 @@ export class DropdownService {
 
   getBRStates() {
     return this.http
-      .get('https://servicodados.ibge.gov.br/api/v1/localidades/estados').pipe(
-        map((res: any) => {
-          return res.map((state: { id: any, sigla: any;}) => {
-            return {
-              id: state.id,
-              value: state.sigla,
-
-            };
-          });
-        })
-      );
+      .get<BRStates[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
   }
 }
