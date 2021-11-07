@@ -194,13 +194,14 @@
         [ngClass]="cssError('fullAddress.city')"
       >
         <label for="city" class="form-label">Cidade: </label>
-        <input
-          type="text"
-          class="form-control"
+        <select
+          class="form-control form-select form-select-lg"
           id="city"
-          placeholder=""
           formControlName="city"
-        />
+        >
+      <option [ngValue]="null" disabled>Selecione...</option>
+      <option *ngFor="let city of cities" [ngValue]="city.nome">{{city.nome}}</option>
+      </select>
 
         <app-error-control
           [showError]="checkValidTouched('fullAddress.city')"

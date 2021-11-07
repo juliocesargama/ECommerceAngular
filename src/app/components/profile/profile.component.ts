@@ -1,9 +1,12 @@
-import { ZipcodeService } from './zipcode/zipcode.service';
-import { BRStates } from './dropdown/BRStates';
-import { DropdownService } from './dropdown/dropdown.service';
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { map, switchMap, tap } from 'rxjs/operators';
+
+import { ZipcodeService } from './zipcode/zipcode.service';
+import { DropdownService } from './dropdown/dropdown.service';
+import { BRStates } from './dropdown/BRStates';
+import { BRCities } from './dropdown/BRCities';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +16,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class ProfileComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   states: BRStates[] = [];
+  cities: BRCities[] = [];
+  // states!: Observable<BRStates[]>;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -22,8 +27,13 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.dropdownSrv.getBRStates()
-    .subscribe((data) => this.states = data);
+    this.dropdownSrv
+      .getBRStates()
+      .subscribe((data: any) => (this.states = data));
+
+      this.dropdownSrv
+      .getBRCities(11)
+      .subscribe((data: any) => (this.cities = data, console.log(data)));
 
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
@@ -47,36 +57,48 @@ export class ProfileComponent implements OnInit {
       }),
       terms: [true, Validators.requiredTrue],
     });
+
+    this.form
+      .get('fullAddress.state')
+      ?.valueChanges.pipe(
+        map((state: any) => this.states.filter(s => s.sigla === state)),
+        map((states: any) =>
+          states && states.length > 0 ? states[0].id : null),
+        switchMap((stateId: number) => this.dropdownSrv.getBRCities(stateId)),
+        tap(console.log)
+      )
+      .subscribe(cities => this.cities = cities);
   }
 
   onSubmit() {
     this.http
       .post('https://httpbin.org/post', JSON.stringify(this.form.value))
       .subscribe(
-        (data) => console.log(data),
-        (error) => console.log(error)
+        (data) => {
+          alert('Cadastro efetuado com sucesso!');
+          this.form.reset();
+        },
+        (error) => alert(error)
       );
-    alert('Cadastro efetuado com sucesso!');
   }
 
   getZipCode() {
     let zipcode = this.form.get('fullAddress.zipcode')?.value;
 
     if (zipcode != '' && zipcode != null) {
-      this.zipcodeSrv.getAddress(zipcode)
-      .subscribe((data: any) => this.setAddress(data));
+      this.zipcodeSrv
+        .getAddress(zipcode)
+        .subscribe((data: any) => this.setAddress(data));
     }
   }
 
   setAddress(data: any) {
     this.form.get('fullAddress')?.patchValue({
-
       street: data.logradouro,
       area: data.bairro,
       city: data.localidade,
       state: data.uf,
     });
-
   }
 
   cssError(field: any) {
