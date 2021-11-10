@@ -1,5 +1,11 @@
+import { FormValidations } from './form-validations';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { map, switchMap, tap } from 'rxjs/operators';
 
@@ -31,13 +37,13 @@ export class ProfileComponent implements OnInit {
       .getBRStates()
       .subscribe((data: any) => (this.states = data));
 
-      this.dropdownSrv
+    this.dropdownSrv
       .getBRCities(11)
-      .subscribe((data: any) => (this.cities = data, console.log(data)));
+      .subscribe((data: any) => (this.cities = data));
 
     this.form = this.formBuilder.group({
       name: [null, Validators.required],
-      phone: [null, Validators.required],
+      phone: [null, [Validators.required, Validators.minLength(10)]],
       email: [null, [Validators.required, Validators.email]],
       password: [
         null,
@@ -48,7 +54,10 @@ export class ProfileComponent implements OnInit {
         ],
       ],
       fullAddress: this.formBuilder.group({
-        zipcode: [null, Validators.required],
+        zipcode: [
+          null,
+          [Validators.required, FormValidations.zipcodeValidator],
+        ],
         street: [null, Validators.required],
         number: [null, Validators.required],
         area: [null, Validators.required],
@@ -61,13 +70,13 @@ export class ProfileComponent implements OnInit {
     this.form
       .get('fullAddress.state')
       ?.valueChanges.pipe(
-        map((state: any) => this.states.filter(s => s.sigla === state)),
+        map((state: any) => this.states.filter((s) => s.sigla === state)),
         map((states: any) =>
-          states && states.length > 0 ? states[0].id : null),
-        switchMap((stateId: number) => this.dropdownSrv.getBRCities(stateId)),
-        tap(console.log)
+          states && states.length > 0 ? states[0].id : null
+        ),
+        switchMap((stateId: number) => this.dropdownSrv.getBRCities(stateId))
       )
-      .subscribe(cities => this.cities = cities);
+      .subscribe((cities) => (this.cities = cities));
   }
 
   onSubmit() {
@@ -83,13 +92,9 @@ export class ProfileComponent implements OnInit {
   }
 
   getZipCode() {
-    let zipcode = this.form.get('fullAddress.zipcode')?.value;
-
-    if (zipcode != '' && zipcode != null) {
-      this.zipcodeSrv
-        .getAddress(zipcode)
-        .subscribe((data: any) => this.setAddress(data));
-    }
+    this.zipcodeSrv
+      .getAddress(this.form.get('fullAddress.zipcode')?.value)
+      .subscribe((data: any) => this.setAddress(data));
   }
 
   setAddress(data: any) {
@@ -103,39 +108,41 @@ export class ProfileComponent implements OnInit {
 
   cssError(field: any) {
     return {
-      'has-error': this.checkValidTouched(field),
-      'has-feedback': this.checkValidTouched(field),
+      'has-error': this.checkRequired(field),
+      'has-feedback': this.checkRequired(field),
     };
   }
 
   checkInvalidEmail() {
-    let emailField = this.form.get('email');
+    return (
+      this.form.get('email')?.hasError('email') &&
+      this.form.get('email')?.touched
+    );
+  }
 
-    if (emailField?.errors?.email) {
-      return emailField?.errors?.email && emailField.touched;
-    }
+  checkMinPhone(){
+    return (
+      this.form.get('phone')?.hasError('minlength')
+    );
   }
 
   checkMinPassword() {
-    let passwordField = this.form.get('password');
-
-    if (passwordField?.value?.length < 6) {
-      return passwordField?.errors?.minlength;
-    }
+    return (
+      this.form.get('password')?.hasError('minlength')
+    );
   }
 
   checkMaxPassword() {
-    let passwordField = this.form.get('password');
-
-    if (passwordField?.value?.length > 20) {
-      return passwordField?.errors?.maxlength;
-    }
+    return (
+      this.form.get('password')?.hasError('maxlength')
+    );
   }
 
-  checkValidTouched(field: any) {
+  checkRequired(field: any) {
     return (
-      !this.form.get(field)?.valid &&
+      this.form.get(field)?.hasError('required') &&
       (this.form.get(field)?.touched || this.form.get(field)?.dirty)
     );
   }
+
 }

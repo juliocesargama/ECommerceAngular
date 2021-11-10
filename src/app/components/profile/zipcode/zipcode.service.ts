@@ -9,10 +9,8 @@ export class ZipcodeService {
   constructor(private http: HttpClient) {}
 
   getAddress(zipcode: string) {
-    let validCep = /^[0-9]{8}$/;
-    if (validCep.test(zipcode)) {
+
      return this.http.get(`//viacep.com.br/ws/${zipcode}/json`);
-    }
-    return of({});
+    
   }
 }

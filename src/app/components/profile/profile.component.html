@@ -15,7 +15,7 @@
       />
 
       <app-error-control
-        [showError]="checkValidTouched('name')"
+        [showError]="checkRequired('name')"
         msgError="Campo nome é obrigatório."
       ></app-error-control>
     </div>
@@ -33,8 +33,13 @@
       />
 
       <app-error-control
-        [showError]="checkValidTouched('phone')"
+        [showError]="checkRequired('phone')"
         msgError="Campo telefone é obrigatório."
+      ></app-error-control>
+
+      <app-error-control
+        [showError]="checkMinPhone()"
+        msgError="Campo telefone inválido."
       ></app-error-control>
     </div>
 
@@ -49,7 +54,7 @@
         formControlName="email"
       />
       <app-error-control
-        [showError]="checkValidTouched('email')"
+        [showError]="checkRequired('email')"
         msgError="Campo email é obrigatório."
       ></app-error-control>
 
@@ -76,7 +81,7 @@
         deve conter entre 6 a 20 caracteres.</small>
 
       <app-error-control
-        [showError]="checkValidTouched('password')"
+        [showError]="checkRequired('password')"
         msgError="Campo senha é obrigatória."
       ></app-error-control>
 
@@ -122,9 +127,13 @@
             </button>
           </div>
           <app-error-control
-            [showError]="checkValidTouched('fullAddress.zipcode')"
+            [showError]="checkRequired('fullAddress.zipcode')"
             msgError="Campo CEP é obrigatório."
           ></app-error-control>
+
+          <app-error-control
+            [showError]="form.get('fullAddress.zipcode')?.hasError('invalidZipCode')"
+            msgError="Campo CEP é inválido."></app-error-control>
         </div>
       </div>
 
@@ -143,7 +152,7 @@
         />
 
         <app-error-control
-          [showError]="checkValidTouched('fullAddress.street')"
+          [showError]="checkRequired('fullAddress.street')"
           msgError="Campo logradouro é obrigatório."
         ></app-error-control>
       </div>
@@ -163,7 +172,7 @@
         />
 
         <app-error-control
-          [showError]="checkValidTouched('fullAddress.number')"
+          [showError]="checkRequired('fullAddress.number')"
           msgError="Campo número é obrigatório."
         ></app-error-control>
       </div>
@@ -183,7 +192,7 @@
         />
 
         <app-error-control
-          [showError]="checkValidTouched('fullAddress.area')"
+          [showError]="checkRequired('fullAddress.area')"
           msgError="Campo bairro é obrigatório."
         ></app-error-control>
       </div>
@@ -204,7 +213,7 @@
       </select>
 
         <app-error-control
-          [showError]="checkValidTouched('fullAddress.city')"
+          [showError]="checkRequired('fullAddress.city')"
           msgError="Campo cidade é obrigatório."
         ></app-error-control>
       </div>
@@ -225,7 +234,7 @@
       </select>
 
         <app-error-control
-          [showError]="checkValidTouched('fullAddress.state')"
+          [showError]="checkRequired('fullAddress.state')"
           msgError="Campo estado é obrigatório."
         ></app-error-control>
       </div>
@@ -247,7 +256,7 @@
       </div>
 
       <app-error-control
-        [showError]="checkValidTouched('terms')"
+        [showError]="checkRequired('terms')"
         msgError="É necessário aceitar os termos de Política de Privacidade. "
       ></app-error-control>
     </div>
