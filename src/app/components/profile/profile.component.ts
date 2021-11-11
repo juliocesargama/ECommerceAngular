@@ -1,13 +1,8 @@
 import { FormValidations } from './form-validations';
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 
 import { ZipcodeService } from './zipcode/zipcode.service';
 import { DropdownService } from './dropdown/dropdown.service';
@@ -98,12 +93,19 @@ export class ProfileComponent implements OnInit {
   }
 
   setAddress(data: any) {
-    this.form.get('fullAddress')?.patchValue({
-      street: data.logradouro,
-      area: data.bairro,
-      city: data.localidade,
-      state: data.uf,
-    });
+    console.log(data);
+    if (!(data.erro == true)) {
+      this.form.get('fullAddress')?.patchValue({
+        street: data.logradouro,
+        area: data.bairro,
+        city: data.localidade,
+        state: data.uf,
+      });
+    } else {
+
+      alert('Cep não encontrado.');
+      this.form.get('fullAddress')?.reset();
+    }
   }
 
   cssError(field: any) {
@@ -120,23 +122,18 @@ export class ProfileComponent implements OnInit {
     );
   }
 
-  checkMinPhone(){
-    return (
-      this.form.get('phone')?.hasError('minlength')
-    );
+  checkMinPhone() {
+    return this.form.get('phone')?.hasError('minlength');
   }
 
   checkMinPassword() {
-    return (
-      this.form.get('password')?.hasError('minlength')
-    );
+    return this.form.get('password')?.hasError('minlength');
   }
 
   checkMaxPassword() {
-    return (
-      this.form.get('password')?.hasError('maxlength')
-    );
+    return this.form.get('password')?.hasError('maxlength');
   }
+
 
   checkRequired(field: any) {
     return (
@@ -144,5 +141,4 @@ export class ProfileComponent implements OnInit {
       (this.form.get(field)?.touched || this.form.get(field)?.dirty)
     );
   }
-
 }

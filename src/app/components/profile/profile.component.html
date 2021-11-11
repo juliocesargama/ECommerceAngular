@@ -78,7 +78,8 @@
         formControlName="password"
       />
       <small class="form-text text-muted">
-        deve conter entre 6 a 20 caracteres.</small>
+        deve conter entre 6 a 20 caracteres.</small
+      >
 
       <app-error-control
         [showError]="checkRequired('password')"
@@ -120,7 +121,6 @@
               type="submit"
               class="btn btn-secondary btn-block"
               (click)="getZipCode()"
-              disabled
               [disabled]="!form.get('fullAddress.zipcode')?.valid"
             >
               Buscar Endereço
@@ -132,11 +132,13 @@
           ></app-error-control>
 
           <app-error-control
-            [showError]="form.get('fullAddress.zipcode')?.hasError('invalidZipCode')"
-            msgError="Campo CEP é inválido."></app-error-control>
+            [showError]="
+              form.get('fullAddress.zipcode')?.hasError('invalidZipCode')
+            "
+            msgError="Campo CEP é inválido."
+          ></app-error-control>
         </div>
       </div>
-
       <!-- Input Street -->
       <div
         class="form-group mb-3 col-9"
@@ -208,9 +210,11 @@
           id="city"
           formControlName="city"
         >
-      <option [ngValue]="null" disabled>Selecione...</option>
-      <option *ngFor="let city of cities" [ngValue]="city.nome">{{city.nome}}</option>
-      </select>
+          <option [ngValue]="null" disabled>Selecione...</option>
+          <option *ngFor="let city of cities" [ngValue]="city.nome">
+            {{ city.nome }}
+          </option>
+        </select>
 
         <app-error-control
           [showError]="checkRequired('fullAddress.city')"
@@ -223,15 +227,17 @@
         class="form-group mb-2 col-3"
         [ngClass]="cssError('fullAddress.state')"
       >
-      <label for="state" class="form-label">Estado: </label>
+        <label for="state" class="form-label">Estado: </label>
         <select
           class="form-control form-select form-select-lg"
           id="state"
           formControlName="state"
         >
-      <option [ngValue]="null" disabled>Selecione...</option>
-      <option *ngFor="let state of states" [ngValue]="state.sigla">{{state.sigla}}</option>
-      </select>
+          <option [ngValue]="null" disabled>Selecione...</option>
+          <option *ngFor="let state of states" [ngValue]="state.sigla">
+            {{ state.sigla }}
+          </option>
+        </select>
 
         <app-error-control
           [showError]="checkRequired('fullAddress.state')"
