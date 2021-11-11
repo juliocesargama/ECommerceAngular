@@ -1,10 +1,9 @@
-import { state } from '@angular/animations';
-import { BRStates } from './BRStates';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { map } from 'rxjs/operators';
 import { BRCities } from './BRCities';
+import { BRStates } from './BRStates';
 
 @Injectable({
   providedIn: 'root',

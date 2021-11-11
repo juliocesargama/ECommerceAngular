@@ -1,4 +1,3 @@
-import { preserveWhitespacesDefault } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Products } from './products';
 import { ProductsService } from './products.service';
@@ -11,13 +10,18 @@ preserveWhitespaces: true;
 })
 export class ProductsComponent implements OnInit {
 
-  products!: Products[];
+  products: any = [];
 
   constructor(private productsService: ProductsService) { }
 
   ngOnInit(): void {
+
     this.productsService.getProducts()
-    .subscribe(data => this.products = data);
+    .subscribe((res: Products) => {
+      this.products = res;
+    });
+
+    console.log(this.products);
   }
 
 }
