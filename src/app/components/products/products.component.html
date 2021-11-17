@@ -10,7 +10,7 @@
       <p class="card-text">{{ product.description }}</p>
       <p class="card-text">R{{ product.price | currency }}</p>
 
-      <a href="#" class="btn btn-dark">Adicionar ao carrinho</a>
+      <a class="btn btn-dark" (click)="addToCart()">Adicionar ao carrinho</a>
     </div>
 
   </div>

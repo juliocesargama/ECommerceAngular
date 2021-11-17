@@ -24,4 +24,8 @@ export class ProductsComponent implements OnInit {
     console.log(this.products);
   }
 
+  addToCart(){
+    alert('Função ainda não implementada, aguarde próximas atualizações.');
+  }
+
 }
