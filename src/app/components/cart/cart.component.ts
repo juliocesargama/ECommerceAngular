@@ -12,4 +12,8 @@ export class CartComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  Checkout() {
+    alert('Função ainda não implementada, aguarde próximas atualizações.');
+  }
+
 }
