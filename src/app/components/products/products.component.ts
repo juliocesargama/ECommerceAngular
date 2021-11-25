@@ -1,3 +1,4 @@
+import { HeaderComponent } from './../header/header.component';
 import { Component, OnInit } from '@angular/core';
 import { Products } from './products';
 import { ProductsService } from './products.service';
@@ -21,11 +22,13 @@ export class ProductsComponent implements OnInit {
       this.products = res;
     });
 
-    console.log(this.products);
   }
 
   addToCart(){
-    alert('Função ainda não implementada, aguarde próximas atualizações.');
+
+    HeaderComponent.addCartItem();
+
+  //  alert('Função ainda não implementada, aguarde próximas atualizações.');
   }
 
 }
