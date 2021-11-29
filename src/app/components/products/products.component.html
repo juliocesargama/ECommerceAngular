@@ -5,14 +5,22 @@
       [src]="product.photo"
       alt=""
     />
-    <div class="card-body">
+    <div class="card-body p-1">
       <h5 class="card-title">{{ product.name }}</h5>
-      <p class="card-text">{{ product.description }}</p>
+      <p class="card-subtitle">{{ product.description }}</p>
       <p class="card-text">R{{ product.price | currency }}</p>
-
-      <a class="btn btn-dark" (click)="addToCart()">Adicionar ao carrinho</a>
     </div>
-
+    <div class="card-body d-flex justify-content-center align-items-center p-1">
+      <p class="card-text mx-2" for="quantity">Quantidade: </p>
+      <select name="quantity" class="form-control custom-select-sm mb-3 w-25 mx-2">
+        <option selected>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <a class="btn btn-dark" (click)="addToCart()">Adicionar ao carrinho</a>
   </div>
 </div>
 
