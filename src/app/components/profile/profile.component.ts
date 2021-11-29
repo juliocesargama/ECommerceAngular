@@ -18,7 +18,6 @@ export class ProfileComponent implements OnInit {
   form: FormGroup = new FormGroup({});
   states: BRStates[] = [];
   cities: BRCities[] = [];
-  // states!: Observable<BRStates[]>;
 
   constructor(
     private formBuilder: FormBuilder,

@@ -58,8 +58,13 @@
           </li>
 
           <li class="list-group-item d-flex justify-content-between">
+            <span>Desconto </span>
+            <strong class="text text-success">R{{ discount | currency}}</strong>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between">
             <span>Valor Total </span>
-            <strong>R$20,00</strong>
+            <strong>R{{totalPrice | currency}}</strong>
 
           </li>
         </ul>
@@ -69,9 +74,10 @@
             <input
               type="text"
               class="form-control"
+              name="discount"
               placeholder="Cupom de desconto"
             />
-            <button type="submit" disabled class="btn ml-2 btn-secondary">
+            <button type="submit" (click)="addDiscount()" disabled class="btn ml-2 btn-secondary">
               Ativar
             </button>
           </div>
