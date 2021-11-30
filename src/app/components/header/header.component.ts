@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
   }
 
   setCartItem() {
-      return HeaderComponent.cartItem + ' iten(s)';
+      return HeaderComponent.cartItem;
  }
 
   constructor() {

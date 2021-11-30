@@ -1,5 +1,6 @@
+import { Products } from './../products/products';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
@@ -8,16 +9,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
-  cartItems = [];
+   static cartItems: Products[] = [];
+   form: FormGroup = new FormGroup({});
 
-  form: FormGroup = new FormGroup({});
-
-  totalPrice: number;
-  discount: number;
+   static totalPrice: number = 0;
+   discount: number = 0;
 
   constructor(private formBuilder: FormBuilder) {
-    this.totalPrice = 0;
-    this.discount = 0;
+
   }
 
   ngOnInit(): void {
@@ -26,9 +25,18 @@ export class CartComponent implements OnInit {
     });
   }
 
+  static setCartItem(product: Products, quantity: number) {
+    this.cartItems.push(product);
+    this.totalPrice += product.price * quantity;
+  }
+
+  setTotalPrice() {
+    return (CartComponent.totalPrice -= this.discount);
+  }
+
   addDiscount() {
     if (this.form.get('discount')!.value == '10OFF') {
-      return (this.discount = this.totalPrice * 0.1);
+      return (this.discount = CartComponent.totalPrice * 0.1);
     }else{
       return (this.discount = 0);
     }

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +11,8 @@ import { ProductsModule } from './components/products/products.module';
 import { ProfileModule } from './components/profile/profile.module';
 import { HttpClientModule } from '@angular/common/http';
 
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -36,4 +37,6 @@ const maskConfig: Partial<IConfig> = {
   providers: [],
   bootstrap: [AppComponent],
 })
+
+
 export class AppModule {}
