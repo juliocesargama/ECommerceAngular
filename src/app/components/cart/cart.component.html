@@ -35,8 +35,8 @@
             </div>
 
             <div class="row align-items-center">
-              <span class="text-muted">R$0,00</span>
-              <button type="button" class="btn ml-2 btn-light">
+              <span class="text-muted">R$0,00 x 1</span>
+              <button type="button" disabled class="btn ml-2 btn-light">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -64,7 +64,7 @@
 
           <li class="list-group-item d-flex justify-content-between">
             <span>Valor Total </span>
-            <strong>R{{totalPrice | currency}}</strong>
+            <strong>R{{setTotalPrice() | currency}}</strong>
 
           </li>
         </ul>

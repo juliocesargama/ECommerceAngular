@@ -10,17 +10,17 @@
       <p class="card-subtitle">{{ product.description }}</p>
       <p class="card-text">R{{ product.price | currency }}</p>
     </div>
-    <div class="card-body d-flex justify-content-center align-items-center p-1">
+    <div [formGroup]="form" class="card-body d-flex justify-content-center align-items-center p-1">
       <p class="card-text mx-2" for="quantity">Quantidade: </p>
-      <select name="quantity" class="form-control custom-select-sm mb-3 w-25 mx-2">
-        <option selected>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
+      <select name="quantity" class="form-control custom-select-sm mb-3 w-25 mx-2" formControlName="quantity">
+        <option [ngValue]="1">1</option>
+        <option [ngValue]="2">2</option>
+        <option [ngValue]="3">3</option>
+        <option [ngValue]="4">4</option>
+        <option [ngValue]="5">5</option>
       </select>
     </div>
-    <a class="btn btn-dark" (click)="addToCart()">Adicionar ao carrinho</a>
+    <a class="btn btn-dark" (click)="addToCart(this.product, this.form.get('quantity')?.value)">Adicionar ao carrinho</a>
   </div>
 </div>
 
