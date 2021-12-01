@@ -8,8 +8,8 @@
 
     <div class="col-xl-8 col-md-12">
       <div class="col">
-        <ul class="list-group mb-3">
-          <!-- NGFor vai aqui -->
+        <ul class="list-group" *ngFor="let cartItem of getCartItems()">
+          <!-- NGFor inicia aqui -->
           <li
             class="
               list-group-item
@@ -17,6 +17,7 @@
               align-items-center
               justify-content-between
               lh-sm
+              mb-1
             "
           >
             <div class="row align-items-center">
@@ -24,18 +25,18 @@
                 <img
                   width="120vh"
                   height="120vh"
-                  src="https://www.nestle.com.br/images/default-source/embalagens-produto/chocolate-ao-leite/classic-ao-leite-familiar.png"
+                  src="{{ cartItem.photo }}"
                 />
               </div>
 
               <div class="col col-auto">
-                <h6 class="my-0">Nome do Produto</h6>
-                <small class="text-muted">Descrição do produto</small>
+                <h6 class="my-0">{{cartItem.name}}</h6>
+                <small class="text-muted">{{cartItem.description}}</small>
               </div>
             </div>
 
             <div class="row align-items-center">
-              <span class="text-muted">R$0,00 x 1</span>
+              <span class="text-muted">Unit: R{{cartItem.price | currency}}</span>
               <button type="button" disabled class="btn ml-2 btn-light">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -56,7 +57,10 @@
               </button>
             </div>
           </li>
+          <!-- Fim do NGFor -->
+          </ul>
 
+          <ul class="list-group mb-2">
           <li class="list-group-item d-flex justify-content-between">
             <span>Desconto </span>
             <strong class="text text-success">R{{ discount | currency}}</strong>
@@ -69,7 +73,7 @@
           </li>
         </ul>
 
-        <form class="card mb-3 p-2">
+        <form class="card mb-2 p-2">
           <div class="input-group">
             <input
               type="text"
@@ -154,7 +158,7 @@
       </div>
     </div>
 
-    <div class="col-xl-12 mt-3">
+    <div class="col-xl-12 my-2">
       <div class="col">
         <form>
           <button

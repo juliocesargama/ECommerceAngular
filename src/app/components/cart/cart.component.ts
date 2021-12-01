@@ -9,7 +9,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
-   static cartItems: Products[] = [];
+  static cartItems: Products[] = [];
    form: FormGroup = new FormGroup({});
 
    static totalPrice: number = 0;
@@ -32,6 +32,10 @@ export class CartComponent implements OnInit {
 
   setTotalPrice() {
     return (CartComponent.totalPrice -= this.discount);
+  }
+
+  getCartItems(){
+    return CartComponent.cartItems;
   }
 
   addDiscount() {
