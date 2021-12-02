@@ -25,18 +25,18 @@
                 <img
                   width="120vh"
                   height="120vh"
-                  src="{{ cartItem.photo }}"
+                  src="{{ cartItem.product.photo }}"
                 />
               </div>
 
               <div class="col col-auto">
-                <h6 class="my-0">{{cartItem.name}}</h6>
-                <small class="text-muted">{{cartItem.description}}</small>
+                <h6 class="my-0">{{cartItem.product.name}}</h6>
+                <small class="text-muted">{{cartItem.product.description}}</small>
               </div>
             </div>
 
             <div class="row align-items-center">
-              <span class="text-muted">Unit: R{{cartItem.price | currency}}</span>
+              <span class="text-muted">R{{cartItem.product.price | currency}} X {{cartItem.quantity}}</span>
               <button type="button" disabled class="btn ml-2 btn-light">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

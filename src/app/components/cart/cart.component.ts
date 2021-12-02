@@ -1,6 +1,7 @@
 import { Products } from './../products/products';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Cart } from './cart';
 
 @Component({
   selector: 'app-cart',
@@ -9,7 +10,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class CartComponent implements OnInit {
 
-  static cartItems: Products[] = [];
+  static cartItems: Cart[] = [];
    form: FormGroup = new FormGroup({});
 
    static totalPrice: number = 0;
@@ -26,7 +27,10 @@ export class CartComponent implements OnInit {
   }
 
   static setCartItem(product: Products, quantity: number) {
-    this.cartItems.push(product);
+    
+    let cartItem: Cart = {  product: product, quantity: quantity };
+
+    this.cartItems.push(cartItem);
     this.totalPrice += product.price * quantity;
   }
 
