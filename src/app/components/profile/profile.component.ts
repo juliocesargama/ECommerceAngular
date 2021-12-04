@@ -32,7 +32,7 @@ export class ProfileComponent implements OnInit {
       .subscribe((data: any) => (this.states = data));
 
     this.dropdownSrv
-      .getBRCities(11)
+      .getBRCities(0)
       .subscribe((data: any) => (this.cities = data));
 
     this.form = this.formBuilder.group({
