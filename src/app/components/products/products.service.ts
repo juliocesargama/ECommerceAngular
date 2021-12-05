@@ -1,13 +1,16 @@
-import { CartComponent } from './../cart/cart.component';
-import { Products } from './products';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
+import { Products } from './products';
+import { CartService } from '../cart/cart.service';
 
 @Injectable()
 
 
 export class ProductsService {
 
+
+  cartsrv!: CartService;
 
   constructor(private http: HttpClient){}
 
@@ -17,7 +20,7 @@ export class ProductsService {
 
   addToCart(product: Products, quantity: number){
 
-    CartComponent.setCartItem(product, quantity);
+    this.cartsrv.setCartItem(product, quantity);
 
   }
 

@@ -7,7 +7,7 @@ import { AppRoutingModule } from './../../app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 
 import { ProfileComponent } from './profile.component';
-import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import { ErrorControlComponent } from './error-control/error-control.component'
 
 @NgModule({

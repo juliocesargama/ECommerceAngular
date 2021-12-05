@@ -1,7 +1,7 @@
-import { Products } from './../products/products';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
 import { Cart } from './cart';
+import { Products } from './../products/products';
+
 
 @Component({
   selector: 'app-cart',
@@ -9,49 +9,46 @@ import { Cart } from './cart';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
+  cartItems: Cart[] = [];
 
-  static cartItems: Cart[] = [];
-   form: FormGroup = new FormGroup({});
+  totalPrice: number = 0;
+  discount: number = 0;
 
-   static totalPrice: number = 0;
-   discount: number = 0;
-
-  constructor(private formBuilder: FormBuilder) {
-
-  }
+  constructor() {}
 
   ngOnInit(): void {
-    this.form = this.formBuilder.group({
-      discount: [null]
-    });
+
   }
 
-  static setCartItem(product: Products, quantity: number) {
-    
-    let cartItem: Cart = {  product: product, quantity: quantity };
+  setCartItem(product: Products, quantity: number) {
+    let cartItem: Cart = { product: product, quantity: quantity };
 
     this.cartItems.push(cartItem);
     this.totalPrice += product.price * quantity;
   }
 
   setTotalPrice() {
-    return (CartComponent.totalPrice -= this.discount);
+    return (this.totalPrice -= this.discount);
   }
 
-  getCartItems(){
-    return CartComponent.cartItems;
+  setDiscount(){
+    return this.discount;
   }
 
-  addDiscount() {
-    if (this.form.get('discount')!.value == '10OFF') {
-      return (this.discount = CartComponent.totalPrice * 0.1);
-    }else{
-      return (this.discount = 0);
-    }
-
+  getTotalPrice() {
+    return this.totalPrice;
   }
 
-  Checkout() {
+  getCartItems() {
+    return this.cartItems;
+  }
+
+  onAddDiscount() {
+      console.log(this.discount);
+  }
+
+  onCheckout() {
+
     alert('Função ainda não implementada, aguarde próximas atualizações.');
   }
 }

@@ -63,7 +63,7 @@
           <ul class="list-group mb-2">
           <li class="list-group-item d-flex justify-content-between">
             <span>Desconto </span>
-            <strong class="text text-success">R{{ discount | currency}}</strong>
+            <strong class="text text-success">R{{ setDiscount() | currency}}</strong>
           </li>
 
           <li class="list-group-item d-flex justify-content-between">
@@ -73,19 +73,20 @@
           </li>
         </ul>
 
-        <form class="card mb-2 p-2">
+        <div class="card mb-2 p-2">
           <div class="input-group">
             <input
               type="text"
               class="form-control"
-              name="discount"
+              id="discount"
               placeholder="Cupom de desconto"
+              (ngModel)="discount"
             />
-            <button type="submit" (click)="addDiscount()" disabled class="btn ml-2 btn-secondary">
+            <button (click)="onAddDiscount()" class="btn ml-2 btn-secondary">
               Ativar
             </button>
           </div>
-        </form>
+        </div>
       </div>
     </div>
 
@@ -101,7 +102,6 @@
             mask="00000-000"
             [showMaskTyped]="true"
             [validation]="true"
-            formControlName="zipcode"
             />
 
             <button type="button" disabled class="btn ml-2 btn-secondary">
@@ -160,15 +160,12 @@
 
     <div class="col-xl-12 my-2">
       <div class="col">
-        <form>
           <button
             class="w-100 btn btn-primary btn-lg"
-            type="submit"
-            (click)="Checkout()"
+            (click)="onCheckout()"
           >
             Finalizar Compra
           </button>
-        </form>
       </div>
     </div>
   </div>
