@@ -7,13 +7,16 @@ import { Products } from '../products/products';
 })
 export class CartService {
 
-  cart!: CartComponent;
 
-  setCartItem(product: Products, quantity: number) {
-      this.cart.setCartItem(product, quantity);
+  setCartItem(product: Products, quantity: number): void {
+
+    CartComponent.onSetCartItem(product, quantity);
+
   }
 
-  constructor() { }
+  constructor() {
+
+  }
 
 
 }

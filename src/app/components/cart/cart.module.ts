@@ -1,3 +1,5 @@
+import { ProductsService } from './../products/products.service';
+import { CartService } from './cart.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -11,14 +13,14 @@ import { NgxMaskModule } from 'ngx-mask';
 
   imports: [
     CommonModule,
-    AppRoutingModule,
     FormsModule,
+    AppRoutingModule,
     NgxMaskModule.forRoot({
       dropSpecialCharacters: false
     })
   ],
   declarations: [CartComponent],
   exports: [],
-  providers: []
+  providers: [ProductsService]
 })
 export class CartModule { }

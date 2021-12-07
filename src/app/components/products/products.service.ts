@@ -9,8 +9,7 @@ import { CartService } from '../cart/cart.service';
 
 export class ProductsService {
 
-
-  cartsrv!: CartService;
+  service: CartService = new CartService;
 
   constructor(private http: HttpClient){}
 
@@ -20,7 +19,8 @@ export class ProductsService {
 
   addToCart(product: Products, quantity: number){
 
-    this.cartsrv.setCartItem(product, quantity);
+
+     this.service.setCartItem(product, quantity);
 
   }
 

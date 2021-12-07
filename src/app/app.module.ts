@@ -27,12 +27,12 @@ const maskConfig: Partial<IConfig> = {
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
     ProductsModule,
-    FormsModule,
-    ReactiveFormsModule,
     ProfileModule,
     CartModule,
     NgxMaskModule.forRoot(maskConfig)

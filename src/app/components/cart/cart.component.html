@@ -1,5 +1,6 @@
 <div class="container">
-  <div class="row">
+
+  <div class="row" *ngIf="getTotalItems() > 0">
     <div class="col-12">
       <h4 class="d-flex col-12 justify-content-between align-items-center mt-3">
         <span class="text-secondary">Carrinho de Compras</span>
@@ -8,7 +9,8 @@
 
     <div class="col-xl-8 col-md-12">
       <div class="col">
-        <ul class="list-group" *ngFor="let cartItem of getCartItems()">
+        <ul class="list-group" *ngFor="let item of getCartItems()">
+
           <!-- NGFor inicia aqui -->
           <li
             class="
@@ -25,18 +27,18 @@
                 <img
                   width="120vh"
                   height="120vh"
-                  src="{{ cartItem.product.photo }}"
+                  src="{{ item.product.photo }}"
                 />
               </div>
 
               <div class="col col-auto">
-                <h6 class="my-0">{{cartItem.product.name}}</h6>
-                <small class="text-muted">{{cartItem.product.description}}</small>
+                <h6 class="my-0">{{ item.product.name }}</h6>
+                <small class="text-muted">{{ item.product.description }}</small>
               </div>
             </div>
 
             <div class="row align-items-center">
-              <span class="text-muted">R{{cartItem.product.price | currency}} X {{cartItem.quantity}}</span>
+              <span class="text-muted">R{{ item.product.price | currency }}  X {{ item.quantity }}</span>
               <button type="button" disabled class="btn ml-2 btn-light">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -57,18 +59,18 @@
               </button>
             </div>
           </li>
+        </ul>
           <!-- Fim do NGFor -->
-          </ul>
 
-          <ul class="list-group mb-2">
+        <ul class="list-group mb-2">
           <li class="list-group-item d-flex justify-content-between">
             <span>Desconto </span>
-            <strong class="text text-success">R{{ setDiscount() | currency}}</strong>
+            <strong class="text text-success">R{{ getDiscount() | currency}}</strong>
           </li>
 
           <li class="list-group-item d-flex justify-content-between">
             <span>Valor Total </span>
-            <strong>R{{setTotalPrice() | currency}}</strong>
+            <strong>R{{ getTotalPrice() | currency}}</strong>
 
           </li>
         </ul>
@@ -78,11 +80,14 @@
             <input
               type="text"
               class="form-control"
-              id="discount"
+              id="coupon"
               placeholder="Cupom de desconto"
-              (ngModel)="discount"
+              [(ngModel)]="coupon"
+              [disabled]="active"
+              [ngClass]="{ 'is-valid': active === true }"
+              [ngClass]="{ 'is-invalid': active === false }"
             />
-            <button (click)="onAddDiscount()" class="btn ml-2 btn-secondary">
+            <button (click)="onAddDiscount()" [disabled]="active" class="btn ml-2 btn-secondary">
               Ativar
             </button>
           </div>
@@ -168,5 +173,43 @@
           </button>
       </div>
     </div>
+  </div>
+
+  <div class="row" *ngIf="getTotalItems() <= 0">
+    <div class="col-12">
+      <div class="alert alert-dark d-flex justify-content-center mt-3" role="alert">
+        <h4 class="alert-heading">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            class="feather feather-alert-circle mt-1"
+            viewBox="0 0 24 24"
+          >
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12" y2="16"></line>
+          </svg>
+        </h4>
+        <p class="m-2">
+          Seu carrinho está vazio.
+        </p>
+    </div>
+    <div class="row justify-content-center">
+
+      <a
+        href="/"
+        class="btn btn-secondary"
+        routerLinkActive="active"
+      >
+        Voltar para a loja
+      </a>
+
+  </div>
   </div>
 </div>
