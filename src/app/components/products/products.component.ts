@@ -35,7 +35,7 @@ export class ProductsComponent implements OnInit {
     HeaderComponent.addCartItem();
 
     this.productsService.addToCart(product, quantity);
-    
+
   }
 
 }
