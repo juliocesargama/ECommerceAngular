@@ -1,4 +1,5 @@
 <div class="container">
+  <!-- Carrinho com Produtos -->
 
   <div class="row" *ngIf="getTotalItems() > 0">
     <div class="col-12">
@@ -10,36 +11,28 @@
     <div class="col-xl-8 col-md-12">
       <div class="col">
         <ul class="list-group" *ngFor="let item of getCartItems()">
-
           <!-- NGFor inicia aqui -->
-          <li
-            class="
-              list-group-item
-              d-flex
-              align-items-center
-              justify-content-between
-              lh-sm
-              mb-1
-            "
-          >
-            <div class="row align-items-center">
-              <div class="col-auto">
+          <li class="list-group-item p-0 mb-1">
+            <div class="d-flex flex-row align-items-center">
+
+              <div class="flex-col p-1 justify-content-start">
                 <img
-                  width="120vh"
-                  height="120vh"
+                  width="100vh"
+                  height="100vh"
                   src="{{ item.product.photo }}"
                 />
               </div>
-
-              <div class="col col-auto">
+              <div class="flex-col flex-fill p-1 justify-content-start">
                 <h6 class="my-0">{{ item.product.name }}</h6>
-                <small class="text-muted">{{ item.product.description }}</small>
+                <span class="small text-muted">{{ item.product.description }}</span>
               </div>
-            </div>
 
-            <div class="row align-items-center">
-              <span class="text-muted">R{{ item.product.price | currency }}  X {{ item.quantity }}</span>
-              <button type="button" disabled class="btn ml-2 btn-light">
+              <div class="flex-col d-inline-flex  align-items-center justify-content-end">
+              <span class="small text-center p-1">
+                {{ item.product.price | currency: 'BRL' }} X
+                {{ item.quantity }}</span
+              >
+              <button type="button" class="ml-1 btn btn-sm btn-light">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"
@@ -58,24 +51,26 @@
                 </svg>
               </button>
             </div>
+            </div>
           </li>
         </ul>
-          <!-- Fim do NGFor -->
+        <!-- Fim do NGFor -->
 
         <ul class="list-group mb-2">
           <li class="list-group-item d-flex justify-content-between">
             <span>Desconto </span>
-            <strong class="text text-success">R{{ getDiscount() | currency}}</strong>
+            <strong class="text text-success"
+              >{{ getDiscount() | currency: 'BRL' }}</strong
+            >
           </li>
 
           <li class="list-group-item d-flex justify-content-between">
             <span>Valor Total </span>
-            <strong>R{{ getTotalPrice() | currency}}</strong>
-
+            <strong>{{ getTotalPrice() | currency: 'BRL' }}</strong>
           </li>
         </ul>
 
-        <div class="card mb-2 p-2">
+        <div class="card p-2">
           <div class="input-group">
             <input
               type="text"
@@ -83,11 +78,15 @@
               id="coupon"
               placeholder="Cupom de desconto"
               [(ngModel)]="coupon"
-              [disabled]="active"
-              [ngClass]="{ 'is-valid': active === true }"
-              [ngClass]="{ 'is-invalid': active === false }"
+              [disabled]="validCoupon"
+              [ngClass]="{ 'is-valid': validCoupon === true }"
+              [ngClass]="{ 'is-invalid': validCoupon === false }"
             />
-            <button (click)="onAddDiscount()" [disabled]="active" class="btn ml-2 btn-secondary">
+            <button
+              (click)="onAddDiscount()"
+              [disabled]="validCoupon"
+              class="btn ml-2 btn-secondary"
+            >
               Ativar
             </button>
           </div>
@@ -98,63 +97,71 @@
     <div class="col-md-12 col-xl-4">
       <div class="col">
         <div class="card p-2">
-          <span class="text-secondary mb-2">Calcule frete e prazo de entrega: </span>
+          <span class="text-secondary mb-2"
+            >Calcule frete e prazo de entrega:
+          </span>
           <div class="input-group mb-2">
             <input
-            type="text"
-            class="form-control"
-            id="zipcode"
-            mask="00000-000"
-            [showMaskTyped]="true"
-            [validation]="true"
+              type="text"
+              class="form-control"
+              id="zipcode"
+              mask="00000-000"
+              [showMaskTyped]="true"
+              [validation]="false"
+              [(ngModel)]="zipcode"
             />
 
-            <button type="button" disabled class="btn ml-2 btn-secondary">
+            <button
+              type="button"
+              [disabled]="!zipcode"
+              class="btn ml-2 btn-secondary"
+              (click)="isZipcodeValid()"
+            >
               Calcular
             </button>
           </div>
 
-          <div class="mt-2 form-check">
+          <div class="mt-2 form-check" [hidden]="!validZipCode || !zipcode">
             <input
               class="form-check-input"
               type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault2"
+              name="option"
+              id="option1"
               checked
             />
             <label
               class="form-check-label text-secondary"
-              for="flexRadioDefault2"
+              for="option1"
             >
               Opção de frete 1
             </label>
           </div>
 
-          <div class="mt-2 form-check">
+          <div class="mt-2 form-check" [hidden]="!validZipCode || !zipcode">
             <input
               class="form-check-input"
               type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault2"
+              name="option"
+              id="option2"
             />
             <label
               class="form-check-label text-secondary"
-              for="flexRadioDefault2"
+              for="option2"
             >
               Opção de frete 2
             </label>
           </div>
 
-          <div class="mt-2 form-check">
+          <div class="mt-2 form-check" [hidden]="!validZipCode || !zipcode">
             <input
               class="form-check-input"
               type="radio"
-              name="flexRadioDefault"
-              id="flexRadioDefault2"
+              name="option"
+              id="option3"
             />
             <label
               class="form-check-label text-secondary"
-              for="flexRadioDefault2"
+              for="option3"
             >
               Opção de frete 3
             </label>
@@ -166,27 +173,29 @@
     <div class="col-xl-12 my-2">
       <div class="col">
         <a
-        href="/"
-        class="w-100 btn btn-secondary mb-2"
-        routerLinkActive="active"
-      >
-        Adicionar mais produtos
-      </a>
-    </div>
+          href="/"
+          class="w-100 btn btn-outline-secondary mb-2"
+          routerLinkActive="active"
+        >
+          Adicionar mais produtos
+        </a>
+      </div>
       <div class="col">
-          <button
-            class="w-100 btn btn-primary btn-lg"
-            (click)="onCheckout()"
-          >
-            Finalizar Compra
-          </button>
+        <button class="w-100 btn btn-primary btn-lg" (click)="onCheckout()">
+          Finalizar Compra
+        </button>
       </div>
     </div>
   </div>
 
+  <!-- Carrinho Vazio -->
+
   <div class="row" *ngIf="getTotalItems() <= 0">
     <div class="col-12">
-      <div class="alert alert-dark d-flex justify-content-center mt-3" role="alert">
+      <div
+        class="alert alert-dark d-flex justify-content-center mt-3"
+        role="alert"
+      >
         <h4 class="alert-heading">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -205,20 +214,13 @@
             <line x1="12" y1="16" x2="12" y2="16"></line>
           </svg>
         </h4>
-        <p class="m-2">
-          Seu carrinho está vazio.
-        </p>
+        <p class="m-2">Seu carrinho está vazio.</p>
+      </div>
+      <div class="row justify-content-center">
+        <a href="/" class="btn btn-secondary" routerLinkActive="active">
+          Voltar para a loja
+        </a>
+      </div>
     </div>
-    <div class="row justify-content-center">
-
-      <a
-        href="/"
-        class="btn btn-secondary"
-        routerLinkActive="active"
-      >
-        Voltar para a loja
-      </a>
-
-  </div>
   </div>
 </div>

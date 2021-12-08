@@ -11,12 +11,24 @@ import { Products } from './../products/products';
 })
 export class CartComponent implements OnInit {
 
-  static cartItems: Cart [] = [];
+  static cartItems: Cart [] = [
+    { product: {
+      id: 1,
+      photo: 'https://images.tcdn.com.br/img/img_prod/663654/chocolate_barra_crunch_nestle_90g_1119_1_20190807172942.png',
+      name: 'Nestlé Crunch',
+      description: 'Ao leite e crocante, 90gr.',
+      price: 5.50 },
+    quantity: 1 },
+  ];
 
   static totalPrice: number = 0;
   coupon: string = '';
+
   discount: number = 0;
-  active!: boolean;
+  validCoupon!: boolean;
+
+  zipcode!: string;
+  validZipCode: boolean = false;
 
   constructor() {}
 
@@ -62,16 +74,20 @@ export class CartComponent implements OnInit {
     if(this.coupon == '10OFF'){
       this.discount = CartComponent.totalPrice * 0.1;
       CartComponent.totalPrice = CartComponent.totalPrice - this.discount;
-      this.active = true;
+      this.validCoupon = true;
    }else{
       this.discount = 0;
-      this.active = false;
+      this.validCoupon = false;
       alert('Cupom inválido.');
     }
   }
 
   isCouponValid() {
     return true;
+  }
+
+  isZipcodeValid(){
+    this.validZipCode = true;
   }
 
   onCheckout() {

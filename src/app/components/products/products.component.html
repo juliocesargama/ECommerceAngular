@@ -12,7 +12,7 @@
     <div class="card-body p-1">
       <h5 class="card-title">{{ product.name }}</h5>
       <p class="card-subtitle">{{ product.description }}</p>
-      <p class="card-text">R{{ product.price | currency }}</p>
+      <p class="card-text">{{ product.price | currency: 'BRL' }}</p>
     </div>
     <div [formGroup]="form" class="card-body d-flex justify-content-center align-items-center p-1">
       <p class="card-text mx-2" for="quantity">Quantidade: </p>
