@@ -84,7 +84,7 @@
             />
             <button
               (click)="onAddDiscount()"
-              [disabled]="validCoupon"
+              [disabled]="!coupon || validCoupon"
               class="btn ml-2 btn-secondary"
             >
               Ativar

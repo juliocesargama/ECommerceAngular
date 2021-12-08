@@ -11,15 +11,7 @@ import { Products } from './../products/products';
 })
 export class CartComponent implements OnInit {
 
-  static cartItems: Cart [] = [
-    { product: {
-      id: 1,
-      photo: 'https://images.tcdn.com.br/img/img_prod/663654/chocolate_barra_crunch_nestle_90g_1119_1_20190807172942.png',
-      name: 'Nestlé Crunch',
-      description: 'Ao leite e crocante, 90gr.',
-      price: 5.50 },
-    quantity: 1 },
-  ];
+  static cartItems: Cart [] = [];
 
   static totalPrice: number = 0;
   coupon: string = '';
