@@ -32,8 +32,6 @@ export class ProductsComponent implements OnInit {
 
   addToCart(product: Products, quantity: number) {
 
-    HeaderComponent.addCartItem();
-
     this.productsService.addToCart(product, quantity);
 
   }

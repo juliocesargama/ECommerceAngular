@@ -1,3 +1,4 @@
+import { CartComponent } from './../cart/cart.component';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -10,8 +11,8 @@ export class HeaderComponent implements OnInit {
 
   static cartItem: number;
 
-  static addCartItem() {
-    this.cartItem++;
+  static addCartItem(totalItems: number) {
+    HeaderComponent.cartItem = totalItems;
   }
 
   setCartItem() {

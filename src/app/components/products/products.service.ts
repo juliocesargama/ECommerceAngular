@@ -19,7 +19,6 @@ export class ProductsService {
 
   addToCart(product: Products, quantity: number){
 
-
      this.service.setCartItem(product, quantity);
 
   }

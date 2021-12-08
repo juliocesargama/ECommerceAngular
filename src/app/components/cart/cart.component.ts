@@ -1,3 +1,4 @@
+import { HeaderComponent } from './../header/header.component';
 import { Component, OnInit } from '@angular/core';
 
 import { Cart } from './cart';
@@ -29,6 +30,8 @@ export class CartComponent implements OnInit {
 
     CartComponent.cartItems.push(cartItem);
     this.totalPrice += product.price * quantity;
+
+    HeaderComponent.addCartItem(this.cartItems.length);
 
   }
 
