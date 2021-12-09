@@ -1,6 +1,6 @@
 # Aplicação Web - ECommerce com Angular
-#### Status: Em andamento.
-Projeto de uma aplicação web para Ecommerce em Single Page Aplication, contendo página inicial dos produtos, carrinho de compras e perfil (formulário de cadastro), consumindo e armazenando as informações por requisições HTTP, simulando o tráfego dos dados entre o back-end.
+#### Status: Concluído.
+Projeto de uma aplicação web para Ecommerce em Single Page Aplication, contendo página inicial dos produtos, carrinho de compras e perfil (formulário de cadastro), consumindo e armazenando as informações por requisições HTTP e no LocalStorage, simulando o tráfego dos dados entre o back-end.
 
 ## Tecnologias:
 - [Angular v12+](https://angular.io/);
@@ -10,8 +10,9 @@ Projeto de uma aplicação web para Ecommerce em Single Page Aplication, contend
 ## Características:
 - RouteModule;
 - Formulários Reativos (Data Driven);
+- Formulários (Template Driven);
 - HttpClient;
-- Validators;
+- Validators.
 
 ## Instruções para a instalação:
 
