@@ -1,22 +1,23 @@
-import { AppRoutingModule } from './../../app-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AppRoutingModule } from './../../app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ProductsComponent } from './products.component';
 import { ProductsService } from './products.service';
 
 @NgModule({
-  declarations: [
-    ProductsComponent
-  ],
   imports: [
     CommonModule,
     AppRoutingModule,
     ReactiveFormsModule
   ],
+  declarations: [
+    ProductsComponent
+  ],
   exports: [],
-
-  providers: [ProductsService]
+  providers: [
+    ProductsService
+  ]
 })
 export class ProductsModule {}
