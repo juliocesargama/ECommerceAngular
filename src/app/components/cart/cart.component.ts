@@ -10,13 +10,12 @@ import { Products } from './../products/products';
   styleUrls: ['./cart.component.scss'],
 })
 export class CartComponent implements OnInit {
-
-  static cartItems: Cart [] = [];
+  static cartItems: Cart[] = [];
 
   static totalPrice: number = 0;
   coupon: string = '';
 
-  discount: number = 0;
+  static discount: number = 0;
   validCoupon!: boolean;
 
   zipcode!: string;
@@ -24,28 +23,41 @@ export class CartComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-  }
-
-  static onSetCartItem(product: Products, quantity: number) {
+  static onAddCartItem(product: Products, quantity: number) {
 
     let cartItem: Cart = { product: product, quantity: quantity };
 
     CartComponent.cartItems.push(cartItem);
     this.totalPrice += product.price * quantity;
 
-    HeaderComponent.addCartItem(this.cartItems.length);
+    HeaderComponent.updateCartItem(this.cartItems.length);
 
+  }
+
+  removeCartItem(id: number) {
+    CartComponent.onRemoveCartItem(id);
+  }
+
+  static onRemoveCartItem(id: number) {
+    CartComponent.cartItems.forEach((element, index) => {
+      if (element.product.id == id) {
+        this.totalPrice -= element.product.price * element.quantity;
+        CartComponent.cartItems.splice(index, 1);
+      }
+    });
+
+    HeaderComponent.updateCartItem(this.cartItems.length);
   }
 
   getCartItems() {
     return CartComponent.cartItems;
   }
 
-  getTotalItems(){
+  getTotalItems() {
     let total = 0;
-    CartComponent.cartItems.forEach(element => {
+    CartComponent.cartItems.forEach((element) => {
       total += element.quantity;
     });
     return total;
@@ -56,34 +68,29 @@ export class CartComponent implements OnInit {
   }
 
   getDiscount() {
-    return this.discount;
+    return CartComponent.discount;
   }
 
   onAddDiscount() {
-
     console.log(this.coupon);
 
-    if(this.coupon == '10OFF'){
-      this.discount = CartComponent.totalPrice * 0.1;
-      CartComponent.totalPrice = CartComponent.totalPrice - this.discount;
+    if (this.coupon == '10OFF') {
+      CartComponent.discount = CartComponent.totalPrice * 0.1;
+      CartComponent.totalPrice =
+        CartComponent.totalPrice - CartComponent.discount;
       this.validCoupon = true;
-   }else{
-      this.discount = 0;
+    } else {
+      CartComponent.discount = 0;
       this.validCoupon = false;
       alert('Cupom inválido.');
     }
   }
 
-  isCouponValid() {
-    return true;
-  }
-
-  isZipcodeValid(){
+  isZipcodeValid() {
     this.validZipCode = true;
   }
 
   onCheckout() {
-
     alert('Função ainda não implementada, aguarde próximas atualizações.');
   }
 }

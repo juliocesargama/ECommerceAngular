@@ -10,13 +10,12 @@ export class CartService {
 
   setCartItem(product: Products, quantity: number): void {
 
-    CartComponent.onSetCartItem(product, quantity);
+    CartComponent.onAddCartItem(product, quantity);
 
   }
 
   constructor() {
 
   }
-
 
 }

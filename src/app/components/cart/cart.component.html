@@ -32,7 +32,7 @@
                 {{ item.product.price | currency: 'BRL' }} X
                 {{ item.quantity }}</span
               >
-              <button type="button" class="ml-1 btn btn-sm btn-light">
+              <button type="button" class="ml-1 btn btn-sm btn-light" (click)="removeCartItem(item.product.id)">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="16"

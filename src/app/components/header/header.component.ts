@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
 
   static cartItem: number;
 
-  static addCartItem(totalItems: number) {
+  static updateCartItem(totalItems: number) {
     HeaderComponent.cartItem = totalItems;
   }
 
