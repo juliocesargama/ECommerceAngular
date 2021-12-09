@@ -181,7 +181,7 @@
         </a>
       </div>
       <div class="col">
-        <button class="w-100 btn btn-primary btn-lg" (click)="onCheckout()">
+        <button class="w-100  btn btn-primary btn-lg" [disabled]="!validZipCode" (click)="onCheckout()">
           Finalizar Compra
         </button>
       </div>

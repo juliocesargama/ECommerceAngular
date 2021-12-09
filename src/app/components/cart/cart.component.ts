@@ -32,7 +32,7 @@ export class CartComponent implements OnInit {
     CartComponent.cartItems.push(cartItem);
     this.totalPrice += product.price * quantity;
 
-    HeaderComponent.updateCartItem(this.cartItems.length);
+    CartComponent.onUpdateCart();
 
   }
 
@@ -48,11 +48,11 @@ export class CartComponent implements OnInit {
       }
     });
 
-    HeaderComponent.updateCartItem(this.cartItems.length);
+    CartComponent.onUpdateCart();
   }
 
-  getCartItems() {
-    return CartComponent.cartItems;
+  static onUpdateCart(){
+    HeaderComponent.updateCartItem(CartComponent.cartItems.length);
   }
 
   getTotalItems() {
@@ -61,6 +61,10 @@ export class CartComponent implements OnInit {
       total += element.quantity;
     });
     return total;
+  }
+
+  getCartItems() {
+    return CartComponent.cartItems;
   }
 
   getTotalPrice() {
@@ -91,6 +95,11 @@ export class CartComponent implements OnInit {
   }
 
   onCheckout() {
-    alert('Função ainda não implementada, aguarde próximas atualizações.');
+    window.localStorage.setItem('purchase', JSON.stringify([CartComponent.cartItems, CartComponent.discount, CartComponent.totalPrice]));
+    alert('Compra efetuada com sucesso!');
+
+    CartComponent.cartItems = [];
+    CartComponent.onUpdateCart();
+
   }
 }
